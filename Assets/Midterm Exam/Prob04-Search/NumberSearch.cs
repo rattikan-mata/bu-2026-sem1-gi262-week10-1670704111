@@ -18,7 +18,17 @@ namespace MidtermExam.Prob04
         public int AS04_SequentialSearch(int[] values, int target)
         {
             // TODO: เขียนคำตอบแทนคำสั่ง throw ด้านล่าง
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            if (values != null)
+            {
+                // ใช้เวลา O(n) เพราะหาค่าทีละตัวทุกตัว ตั้งแต่ i ถึง n โดยที่ไม่ได้ใช้ฟังก์ชันอะไรค่อ แค่หาค่าเฉยๆ
+                int count = values.Length;
+                for (int i = 0; i < count; i++)
+                {
+                    if (values[i] == target) return i;
+                }
+            }
+            return -1;
         }
 
         /// <summary>ข้อ 04.2: ค้นหาตัวเลขด้วย Binary Search โดยลดช่วงค้นหาประมาณครึ่งหนึ่งต่อขั้น</summary>
@@ -44,7 +54,20 @@ namespace MidtermExam.Prob04
             //    ต้องตัดตำแหน่งที่ตรวจแล้วออก เพื่อให้ช่วงเล็กลงและไม่เกิดการวนซ้ำไม่จบ
             // 4. ถ้าช่วงค้นหาหมดและยังไม่พบ ให้คืนค่าที่โจทย์กำหนดสำหรับกรณีไม่พบ
             // ลองตรวจกรณีสมาชิกเดียว สองสมาชิก เป้าหมายอยู่หัว/ท้าย และเป้าหมายอยู่นอกช่วงค่า
-            throw new NotImplementedException();
+            // throw new NotImplementedException();
+            if (sortedValues != null)
+            {
+                // ใช้เวลา O(log n) เพราะเมื่อวนลูปรอบใหม่จะลดพื้นที่ค้นหาลงครึ่งนึงทุกรอบ
+                int left = 0, right = sortedValues.Length - 1;
+                while (left <= right)
+                {
+                    int mid = left + (right - left) / 2;
+                    if (sortedValues[mid] == target) return mid;
+                    if (sortedValues[mid] < target) left = mid + 1;
+                    else right = mid - 1;
+                }
+            }
+            return -1;
         }
     }
 }
